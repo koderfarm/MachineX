@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MachineX</string>
+    <string name="machine_no">Machine Number</string>
+    <string name="partname">Part Name</string>
+    <string name="line_no1">Line Number</string>
+    <string name="oil_checked">OIL CHECKED</string>
+    <string name="part_changed">PART CHANGED</string>
+    <string name="wiper">WIPER</string>
+    <string name="line_no">LINE NUMBER</string>
+    <string name="hint_user_id">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="login">Login</string>
+    <string name="error">Error</string>
+    <string name="scan">SCAN</string>
+</resources>
