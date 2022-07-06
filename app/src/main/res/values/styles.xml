@@ -23,4 +23,12 @@
         <item name="android:textSize">15dp</item>
         <item name="android:textColor">@color/appbarColor</item>
     </style>
+
+    <style name="spinnerItemStyle">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="spinnerDropDownItemStyle">
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

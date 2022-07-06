@@ -1,30 +1,24 @@
 package com.am.machinex;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.ViewHolder> {
 
     ArrayList<ServiceType> arrayList;
     boolean isSubmitClick = false;
     private Context context;
+    ServiceType serviceType = new ServiceType();
 
     public ServiceTypeAdapter(Context context, ArrayList<ServiceType> arrayList) {
         this.arrayList = arrayList;
@@ -41,18 +35,13 @@ public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.
     @Override
     public void onBindViewHolder(ServiceTypeAdapter.ViewHolder holder, int position) {
         ServiceType data = arrayList.get(holder.getAdapterPosition());
-        if (holder.edit_partname.getText().toString() == null) {
-            if (isSubmitClick) {
-                holder.textInput.setError("please enter a valid input");
-            }
-            data.setTextEmpty(true);
-        } else {
-            data.setTextEmpty(false);
-            //do something else
-        }
-        holder.tv_service_name.setText(data.getChecktype());
-        holder.checkBox.setChecked(data.isSelected());
-        holder.checkBox.setTag(data);
+        holder.rb_checked.setChecked(data.isSelectedcheck());
+        holder.rb_checked.setTag(data);
+
+        holder.rb_unchecked.setChecked(data.isSelectedunckecked());
+        holder.rb_unchecked.setTag(data);
+
+        holder.tv_service_name.setText(data.Checktype);
 
     }
 
@@ -62,53 +51,37 @@ public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textInput;
-        EditText edit_partname;
         TextView tv_service_name;
-        CheckBox checkBox;
+        RadioButton rb_checked;
+        RadioButton rb_unchecked;
+        RadioGroup radioGroup;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            edit_partname = itemView.findViewById(R.id.edit_partname);
-            textInput = itemView.findViewById(R.id.tilTest);
-            checkBox = itemView.findViewById(R.id.servicetypecb);
+            rb_checked = itemView.findViewById(R.id.radiochecked);
+            rb_unchecked = itemView.findViewById(R.id.radiounchecked);
             tv_service_name = itemView.findViewById(R.id.code);
-
-            edit_partname.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    arrayList.get(getAdapterPosition()).setInput(editable.toString());
-                }
-            });
-
-            checkBox.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    CheckBox cb = (CheckBox) v;
-                    ServiceType serviceType = (ServiceType) cb.getTag();
-                    serviceType.setSelected(cb.isChecked());
-                    if (!cb.isChecked()) {
-                        edit_partname.setVisibility(View.GONE);
-                    } else {
-                        if (serviceType.getInput().equals("Y")) {
-                            edit_partname.setVisibility(View.VISIBLE);
-                        }
+            radioGroup = itemView.findViewById(R.id.radio);
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    switch (checkedId) {
+                        case R.id.radiochecked:
+                            // do operations specific to this selection
+                            Log.e("hello" + checkedId,"radio check"+rb_checked.isChecked());
+                            serviceType = (ServiceType) rb_checked.getTag();
+                            serviceType.setSelectedcheck(rb_checked.isChecked());
+                            break;
+                        case R.id.radiounchecked:
+                            // do operations specific to this selection
+                            Log.e("hello"+checkedId,"radio uncheck"+rb_unchecked.isChecked());
+                            serviceType = (ServiceType) rb_unchecked.getTag();
+                            serviceType.setSelectedunckecked(rb_unchecked.isChecked());
+                            break;
                     }
-
-
                 }
-            });
 
+
+            });
         }
     }
 

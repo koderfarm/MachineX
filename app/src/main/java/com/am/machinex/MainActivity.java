@@ -359,13 +359,60 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void checkButtonClick() {
+    int main_id;
 
+    public void getmainID() {
+        HurlStack hurlStack = new HurlStack() {
+            @Override
+            protected HttpURLConnection createConnection(URL url) throws IOException {
+                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) super.createConnection(url);
+                try {
+                    httpsURLConnection.setSSLSocketFactory(getSSLSocketFactory());
+                    httpsURLConnection.setHostnameVerifier(getHostnameVerifier());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return httpsURLConnection;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this, hurlStack);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://artlive.artisticmilliners.com:8081/ords/art/machinex/maint_id/", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("response", response.toString());
+                try {
+                    JSONArray obj = response.getJSONArray("items");
+                    for (int i = 0; i < obj.length(); i++) {
+                        JSONObject jsonObject = obj.getJSONObject(i);
+                        main_id = jsonObject.getInt("maint_id");
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("E", String.valueOf(e.toString()));
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Log.e("ERROR", String.valueOf(error.toString()));
+            }
+        });
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private void checkButtonClick() {
 
         enter_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
 
                 StringBuffer responseText = new StringBuffer();
                 responseText.append("The following were selected...\n");
@@ -373,26 +420,35 @@ public class MainActivity extends AppCompatActivity {
                 List<ServiceType> serviceTypeList = serviceTypeAdapter.arrayList;
                 for (int i = 0; i < serviceTypeList.size(); i++) {
                     ServiceType serviceType = serviceTypeList.get(i);
-                    /*if (serviceType.getInput().equals("Y")){
+                    Log.e("Servicetype count" + i, "check" + serviceType.isSelectedcheck());
+                    Log.e("Servicetype count" + i, "uncheck" + serviceType.isSelectedunckecked());
 
-                    }*/
-                    if (serviceType.isSelected()) {
-                        Log.e("checked sds", "" + serviceType.getCheck_id());
-                        service_type_list.add(serviceType);
-                       /* responseText.append("\n" + serviceType.getCheck_id());
-                        Log.e("checked sds", responseText.toString());*/
-                    }
+                    service_type_list.add(serviceType);
+
                 }
-
-
                 for (int i = 0; i < service_type_list.size(); i++) {
-                    Log.e("hello testing value", "" + service_type_list.get(i).getCheck_id());
-                    Log.e("husid", "" + usid);
-                    Log.e("edit_machine_no.get", "" + edit_machine_no.getText().toString().trim());
+                    if (service_type_list.get(i).isSelectedcheck()) {
+                        status_ok = "Y";
+                    } else {
+                        status_ok = "N";
+                    }
+                    if (service_type_list.get(i).isSelectedunckecked()) {
+                        status_nok = "Y";
+                    } else {
+                        status_nok = "N";
+                    }
+                    getmainID();
                     if (edit_machine_no.getText().toString().isEmpty()) {
                         Errorcustomdialog("Machine Number cannot be empty", "Error");
                     } else {
-                        postDataUsingVolley(edit_machine_no.getText().toString().trim(), service_type_list.get(i).getCheck_id(), usid, edit_line_no.getText().toString().trim(), service_type_list.get(i).getInput());
+
+                        Log.e("status_ok" + status_ok, "");
+                        Log.e("status_not_ok" + status_nok, "");
+                        Log.e("main ID" + main_id, "");
+
+                        postDataUsingVolley(status_ok, status_nok, main_id);
+
+//                        get
                     }
                 }
 
@@ -402,7 +458,88 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void postDataUsingVolley(String machine_no, int ServiceType, String user_id, String line_no, String input) {
+    String status_ok, status_nok;
+
+    private void postDataUsingVolley(String status_ok, String status_nok, int maint_id) {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving ...");
+        progressDialog.show();
+        String url = "https://artlive.artisticmilliners.com:8081/ords/art/machinex/service_done/?status_ok=" + status_ok + "&status_nok=" + status_nok + "&maint_id=" + maint_id;
+        Log.e("URL SAVE", url);
+        HurlStack hurlStack = new HurlStack() {
+            @Override
+            protected HttpURLConnection createConnection(URL url) throws IOException {
+                HttpsURLConnection httpsURLConnection = (HttpsURLConnection) super.createConnection(url);
+                try {
+                    httpsURLConnection.setSSLSocketFactory(getSSLSocketFactory());
+                    httpsURLConnection.setHostnameVerifier(getHostnameVerifier());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return httpsURLConnection;
+            }
+        };
+        // creating a new variable for our request queue
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this, hurlStack);
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                edit_machine_no.setText("");
+                successcustomdialog("Data Created Successfully");
+
+                //customdialog();
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // method to handle errors.
+                Log.e("Error", error.toString());
+                progressDialog.dismiss();
+                if (error.toString().contains("TimeoutError")) {
+                    edit_machine_no.setText("");
+                    Errorcustomdialog("Check your internet connection", "Timeout");
+                } else {
+                    edit_machine_no.setText("");
+                    Errorcustomdialog("Check your internet connection", "Internet Connection");
+                }
+                //                Toast.makeText(AddRollsActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                // below line we are creating a map for
+                // storing our values in key and value pair.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // on below line we are passing our key
+                // and value pair to our parameters.
+                params.put("status_ok", status_ok);
+                params.put("status_nok", status_nok);
+                params.put("maint_id", "" + maint_id);
+
+                // at last we are
+                // returning our params.
+                return params;
+            }
+        };
+        //10000 is the time in milliseconds adn is equal to 10 sec
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // below line is to make
+        // a json object request.
+        queue.add(request);
+    }
+/*
+ private void postDataUsingVolley(String machine_no, int ServiceType, String user_id, String line_no, String input) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Saving ...");
         progressDialog.show();
@@ -480,6 +617,7 @@ public class MainActivity extends AppCompatActivity {
         // a json object request.
         queue.add(request);
     }
+*/
 
     public void successcustomdialog(String msg) {
         final Dialog dialog = new Dialog(MainActivity.this);

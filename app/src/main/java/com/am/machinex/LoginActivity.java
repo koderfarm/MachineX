@@ -200,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
                            Log.e("dept", dept);
                            Log.e("rtn_val", "" + rtn_val);
                            // check the other values like this so on..
-                           Intent history_intent = new Intent(LoginActivity.this, MainActivity.class);
+                           Intent history_intent = new Intent(LoginActivity.this, MenuActivity.class);
                            history_intent.putExtra("user_id", user_id);
                            history_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                            startActivity(history_intent);

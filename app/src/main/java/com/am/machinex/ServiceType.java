@@ -4,31 +4,46 @@ public class ServiceType {
     String Checktype;
     int check_id;
     String input;
-    boolean selected = false;
-    private boolean isTextEmpty;
+    String status_ok, status_nok;
+    int mainID;
+    boolean unckecked = false;
+    boolean checked_boolean = false;
 
-    private String textData;
 
-    public void setTextEmpty(boolean isTrue){
-        isTextEmpty = isTrue;
-    }
-
-    public boolean isTextEmpty(){
-        return isTextEmpty;
-    }
-
-    public void setTextData(String data){
-        textData = data;
-    }
-
-    public String getData(){
-        return textData;
-    }
-
-    public ServiceType(String checktype, String check_id,String input) {
+    public ServiceType(String checktype, String check_id, String input) {
         Checktype = checktype;
         this.check_id = Integer.parseInt(check_id);
         this.input = input;
+    }
+public ServiceType(){}
+   /* public ServiceType(String status_ok, String status_nok, int mainID) {
+        this.status_ok = status_ok;
+        this.status_nok = status_nok;
+        this.mainID = mainID;
+    }
+*/
+    public String getStatus_ok() {
+        return status_ok;
+    }
+
+    public void setStatus_ok(String status_ok) {
+        this.status_ok = status_ok;
+    }
+
+    public String getStatus_nok() {
+        return status_nok;
+    }
+
+    public void setStatus_nok(String status_nok) {
+        this.status_nok = status_nok;
+    }
+
+    public int getMainID() {
+        return mainID;
+    }
+
+    public void setMainID(int mainID) {
+        this.mainID = mainID;
     }
 
     public String getInput() {
@@ -54,10 +69,64 @@ public class ServiceType {
     public void setCheck_id(int check_id) {
         this.check_id = check_id;
     }
-    public boolean isSelected() {
-        return selected;
+
+    public boolean isSelectedunckecked() {
+        return unckecked;
     }
+
+    public void setSelectedunckecked(boolean selected) {
+        this.unckecked = selected;
+    }
+/*
+
+    String checked, unchecked;
+    int mainID;
+
+
+    public ServiceType(String checked, String unchecked, int mainID) {
+        checked = checked;
+        unchecked = unchecked;
+        mainID = mainID;
+    }
+
+    public String getChecked() {
+        return checked;
+    }
+
+    public void setChecked(String checked) {
+        this.checked = checked;
+    }
+
+    public String getUnchecked() {
+        return unchecked;
+    }
+
+    public void setUnchecked(String unchecked) {
+        this.unchecked = unchecked;
+    }
+
+    public int getMainID() {
+        return mainID;
+    }
+
+    public void setMainID(int mainID) {
+        this.mainID = mainID;
+    }
+
+    public boolean isSelected() {
+        return unckecked;
+    }
+
     public void setSelected(boolean selected) {
-        this.selected = selected;
+        this.unckecked = selected;
+    }
+*/
+
+    public boolean isSelectedcheck() {
+        return checked_boolean;
+    }
+
+    public void setSelectedcheck(boolean selected) {
+        this.checked_boolean = selected;
     }
 }

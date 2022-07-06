@@ -12,4 +12,7 @@
     <string name="login">Login</string>
     <string name="error">Error</string>
     <string name="scan">SCAN</string>
+    <string name="daily_machine_txt">Daily Machine Service Record</string>
+    <string name="daily_breakdown_txt">Machine Breakdowns and Parts Changed</string>
+
 </resources>
