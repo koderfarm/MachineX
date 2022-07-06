@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         if (result != null) {
             if (result.getContents() == null) {
 
+
                 Log.d("MainActivity", "Cancelled scan");
 //                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
