@@ -274,28 +274,9 @@ public class MainActivity extends AppCompatActivity {
 
                         serviceType = new ServiceType(check_type, checked_id, is_input);
                         serviceTypeList.add(serviceType);
-
-                        /*tv_fetch_article.setText(art_fancy_name);
-                        tv_fetch_qty.setText(prodqty);*/
-                        Log.e("checked_id", checked_id);
-                        Log.e("check_type", check_type);
-
-
                     }
                     serviceTypeAdapter = new ServiceTypeAdapter(getApplicationContext(), serviceTypeList);
                     service_types_listview.setAdapter(serviceTypeAdapter);
-
-                    /*service_types_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        public void onItemClick(AdapterView<?> myAdapter, View myView, int position, long mylng) {
-                            ServiceType serviceType1 = (ServiceType) myAdapter.getItemAtPosition(position);
-                            Log.e("Hello", serviceType1.getChecktype());
-
-                        }
-                    });*/
-                    //String message = response.getString("message");
-                    //Toast.makeText(getApplicationContext(), ""+status+message, Toast.LENGTH_SHORT).show();
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("E", String.valueOf(e.toString()));
@@ -422,9 +403,6 @@ public class MainActivity extends AppCompatActivity {
                 List<ServiceType> serviceTypeList = serviceTypeAdapter.arrayList;
                 for (int i = 0; i < serviceTypeList.size(); i++) {
                     ServiceType serviceType = serviceTypeList.get(i);
-                    Log.e("Servicetype count" + i, "check" + serviceType.isSelectedcheck());
-                    Log.e("Servicetype count" + i, "uncheck" + serviceType.isSelectedunckecked());
-
                     service_type_list.add(serviceType);
 
                 }
@@ -443,14 +421,7 @@ public class MainActivity extends AppCompatActivity {
                     if (edit_machine_no.getText().toString().isEmpty()) {
                         Errorcustomdialog("Machine Number cannot be empty", "Error");
                     } else {
-
-                        Log.e("status_ok" + status_ok, "");
-                        Log.e("status_not_ok" + status_nok, "");
-                        Log.e("main ID" + main_id, "");
-
                         postDataUsingVolley(status_ok, status_nok, main_id);
-
-//                        get
                     }
                 }
 
@@ -511,7 +482,6 @@ public class MainActivity extends AppCompatActivity {
                     edit_machine_no.setText("");
                     Errorcustomdialog("Check your internet connection", "Internet Connection");
                 }
-                //                Toast.makeText(AddRollsActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
