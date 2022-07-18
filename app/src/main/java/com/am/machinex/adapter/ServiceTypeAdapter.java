@@ -1,4 +1,4 @@
-package com.am.machinex;
+package com.am.machinex.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,11 +11,14 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.am.machinex.R;
+import com.am.machinex.models.ServiceType;
+
 import java.util.ArrayList;
 
 public class ServiceTypeAdapter extends RecyclerView.Adapter<ServiceTypeAdapter.ViewHolder> {
 
-    ArrayList<ServiceType> arrayList;
+    public ArrayList<ServiceType> arrayList;
     boolean isSubmitClick = false;
     private Context context;
     ServiceType serviceType = new ServiceType();

@@ -1,7 +1,7 @@
-package com.am.machinex;
+package com.am.machinex.models;
 
 public class ServiceType {
-    String Checktype;
+    public String Checktype;
     int check_id;
     String input;
     boolean unckecked = false;

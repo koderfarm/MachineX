@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.am.machinex.adapter.ServiceTypeAdapter;
+import com.am.machinex.models.ServiceType;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;

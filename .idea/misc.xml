@@ -6,9 +6,11 @@
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/drawable/disable_btn.xml" value="0.2595" />
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/drawable/listbg.xml" value="0.2595" />
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/drawable/roundbutton.xml" value="0.229" />
+        <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/drawable/roundbuttonxml.xml" value="0.2595" />
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/drawable/sendbtn_foreground.xml" value="0.2595" />
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/drawable/spinner.xml" value="0.228" />
-        <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/layout/activity_machine_breakdown.xml" value="0.2" />
+        <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/drawable/spinner_shape.xml" value="0.2585" />
+        <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/layout/activity_machine_breakdown.xml" value="0.15095628415300547" />
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/layout/activity_main.xml" value="0.2259963768115942" />
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/layout/activity_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/StudioProjects/uroosa/QRReader/machineX/app/src/main/res/layout/listview_checkbox.xml" value="0.1875" />

@@ -1,4 +1,4 @@
-package com.am.machinex;
+package com.am.machinex.models;
 
 public class Login {
     String _userId;

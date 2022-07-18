@@ -2,141 +2,515 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <include
         android:id="@+id/topheader"
         layout="@layout/customappbar" />
 
-    <LinearLayout
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/topheader"
-        android:id="@+id/ll_timer"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_timer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Time: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/start_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00:00"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@id/ll_start_time"
+                        android:layout_alignParentRight="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="End Time: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/stop_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00:00"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dropdown_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_timer"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/service_list_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Service Type"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <ProgressBar
+                            android:id="@+id/service_list_pb"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="15dp"
+                            android:indeterminate="true"
+                            android:indeterminateDrawable="@drawable/customprogressbar"
+                            android:visibility="gone" />
+
+                        <Spinner
+                            android:id="@+id/spin_service_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/spinner_shape"
+                            android:paddingLeft="5dp"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:id="@+id/service_resolved_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Resolved By "
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <ProgressBar
+                            android:id="@+id/service_resolved_pb"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="15dp"
+                            android:indeterminate="true"
+                            android:indeterminateDrawable="@drawable/customprogressbar"
+                            android:visibility="gone" />
+
+                        <Spinner
+                            android:id="@+id/spin_service_resolve"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/spinner_shape"
+                            android:paddingLeft="5dp"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fault_list_rl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Fault Name  "
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <ProgressBar
+                            android:id="@+id/fault_list_pb"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="15dp"
+                            android:indeterminate="true"
+                            android:indeterminateDrawable="@drawable/customprogressbar"
+                            android:visibility="gone" />
+
+                        <Spinner
+                            android:id="@+id/spin_fault_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/spinner_shape"
+                            android:paddingLeft="5dp"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/part_name_rl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Part Name   "
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <ProgressBar
+                            android:id="@+id/part_name_pb"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="15dp"
+                            android:indeterminate="true"
+                            android:indeterminateDrawable="@drawable/customprogressbar"
+                            android:visibility="gone" />
+
+                        <Spinner
+                            android:id="@+id/spin_part_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/spinner_shape"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                   >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Machine #  "
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/edit_machine_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/spinner_shape"
+                        android:hint="@string/machine_no"
+                        android:inputType="text"
+                        android:padding="16dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dropdown_ll"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_start_stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/roundbuttonxml"
+                    android:gravity="center"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
+                    android:text="Start"
+                    android:textColor="#F4FAFB" />
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/roundbuttonxml"
+                    android:gravity="center"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
+                    android:text="Submit"
+                    android:textColor="#F4FAFB" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
+
+
+    <!--
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:id="@+id/service_list_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <LinearLayout
-                android:id="@+id/ll_start_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start Time: "
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/start_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="00:00"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@id/ll_start_time"
-                android:layout_alignParentRight="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="End Time: "
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/stop_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="00:00"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/btn_start_stop"
+        <TextView
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="@drawable/roundbuttonxml"
             android:gravity="center"
-            android:paddingLeft="70dp"
-            android:paddingTop="10dp"
-            android:paddingRight="70dp"
-            android:paddingBottom="10dp"
-            android:text="Start"
-            android:textColor="#F4FAFB" />
-    </LinearLayout>
+            android:text="Service Type"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_timer"
-        android:orientation="vertical">
-
-   <!--     <Spinner
-            android:id="@+id/spinparts_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:background="@drawable/roundbutton"
-            android:gravity="center"
-            android:popupBackground="@android:color/white"
-            android:scrollbars="none"
-            android:spinnerMode="dropdown" />-->
 
         <RelativeLayout
-            android:layout_margin="20dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginEnd="3dp"
-            android:layout_weight=".28"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp">
+
+            <ProgressBar
+                android:id="@+id/service_list_pb"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="15dp"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/customprogressbar"
+                android:visibility="gone" />
 
             <Spinner
-                android:id="@+id/spinparts_name"
+                android:id="@+id/spin_service_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/roundbutton"
+                android:paddingLeft="5dp"
                 android:spinnerMode="dropdown"
                 android:textAlignment="center" />
 
-            <ImageView
+            &lt;!&ndash;<ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24" />
-
+                android:src="@drawable/ic_baseline_arrow_drop_down_24" />&ndash;&gt;
         </RelativeLayout>
 
-        <EditText
-            android:id="@+id/edit_machine_no"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/service_resolved_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:layout_weight="0.5"
+        android:visibility="gone">
+
+        <TextView
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Resolved By"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/roundbutton"
-            android:hint="@string/machine_no"
-            android:inputType="text"
-            android:padding="16dp"
-            android:visibility="visible" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp">
+
+            <ProgressBar
+                android:id="@+id/service_resolved_pb"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="15dp"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/customprogressbar"
+                android:visibility="gone" />
+
+            <Spinner
+                android:id="@+id/spin_service_resolve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/roundbutton"
+                android:paddingLeft="5dp"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center" />
+
+            &lt;!&ndash; <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:layout_centerVertical="true"
+                 android:layout_gravity="center"
+                 android:src="@drawable/ic_baseline_arrow_drop_down_24" />&ndash;&gt;
+        </RelativeLayout>
 
 
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
+    </LinearLayout>-->
